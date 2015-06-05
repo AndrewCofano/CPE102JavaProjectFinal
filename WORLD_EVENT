@@ -1,0 +1,5 @@
+1) To trigger event: Left mouse click
+2) When event is triggered, a 4x4 box of weights (a gym) should spawn replacing the background.
+   If the a miner is within the box when it is spawned, the miner will be effected and turn into a MachoMan.
+3) The affected entities (miners) should chase after Chickens (the new entity) and "consume" them for lean protein.
+4) The new entity is a Chicken which should move randomly, due to a random number generator.

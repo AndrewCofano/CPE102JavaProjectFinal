@@ -6,7 +6,7 @@ public abstract class Miner
 {
    private int resource_limit;
    private int resource_count;
-   private Class<?> seeking;
+   protected Class<?> seeking;
 
    public Miner(String name, Point position, int rate, int animation_rate,
       int resource_limit, int resource_count, Class<?> seeking,
@@ -21,6 +21,11 @@ public abstract class Miner
    protected boolean isMiner()
    {
       return true;
+   }
+
+   protected boolean isCharizard()
+   {
+      return false;
    }
 
    public void setResourceCount(int count)
@@ -66,6 +71,12 @@ public abstract class Miner
       };
       return action[0];
    }
+
+   /*public MachoMan transformToMachoMan(WorldModel world)
+   {
+      return new MachoMan(getName(),getPosition(),getRate(),
+              getAnimationRate(),Chicken.class,ImageStore.macho_imgs);
+   }*/
 
    private Miner tryTransform(WorldModel world)
    {

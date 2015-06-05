@@ -1,8 +1,12 @@
 import processing.core.*;
 
+import javax.crypto.Mac;
+import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.*;
 import java.io.FileNotFoundException;
 import java.io.File;
+import java.util.List;
 
 public class Main extends PApplet
 {
@@ -18,9 +22,14 @@ public class Main extends PApplet
 
    private static final String IMAGE_LIST_FILE_NAME = "imagelist";
    private static final String DEFAULT_IMAGE_NAME = "background_default";
+   private static final String ALTERNATE_IMAGE_NAME = "background_alternate";
    private static final int DEFAULT_IMAGE_COLOR = 0x808080;
 
    private static final String SAVE_FILE_NAME = "gaia.sav";
+
+   private static final String MACHO_MAN_NAME = "Aaron";
+   private static final int MACHO_MAN_RATE = 601;
+   private static final int MACHO_MAN_ANIMATE = 300;
 
    private ImageStore imageStore;
    private long next_time;
@@ -62,6 +71,7 @@ public class Main extends PApplet
       //load images for A* path (Assignment 5)
       openSet_image = loadImage("images/black_square.bmp");
       path_image = loadImage("images/red_tile.jpg");
+
    }
 
    public void draw()
@@ -73,45 +83,45 @@ public class Main extends PApplet
          next_time = time + TIMER_ACTION_DELAY;
       }
 
-      /*for (int row = 0; row < world.getNumRows(); row++)
-         for (int col = 0; col < world.getNumCols(); col++)
-         {
-         */
-
-           // }
-
-        // }
-
+      Point mouse_pt = new Point(pmouseX/32,pmouseY/32);
+      Point actual_mouse_pt = WorldView.viewportToWorld(view.viewport, mouse_pt.x, mouse_pt.y);
 
       view.drawViewport();
 
-      Point mouse_pt = new Point(pmouseX/32,pmouseY/32);
-      //if (pmouseX == pt.x && pmouseY == pt.y)
-      //{
-      //WorldEntity entity = world.getCell(world.getOccupancy(), mouse);
-      if (world.getCell(world.getOccupancy(), mouse_pt) instanceof MobileAnimatedActor)
+      //Point mouse_pt = new Point(pmouseX/32,pmouseY/32);
+      if (mousePressed == true)
       {
-         MobileAnimatedActor mobile_entity = (MobileAnimatedActor)world.getCell(world.getOccupancy(), mouse_pt);
-         OrderedList<Node> openSet = mobile_entity.getOpenSet();
-         if (openSet != null)
+         Background alternate_background = createAlternateBackground(imageStore);
+         world.queueWorldEvent(imageStore, alternate_background, actual_mouse_pt, 8, next_time);
+         /*
+         Point new_pt;
+         for (int i = 0; i < 4; i++)
          {
-            LinkedList<Node> openSet_list = openSet.getItems();
-            for (Node node : openSet_list)
+            for (int j = 0; j < 4; j++)
             {
-               image(openSet_image, (node.getPosition().x *32) + 4, (node.getPosition().y*32)+4);
-            }
+               List<PImage> macho_imgs = imageStore.get("macho");
+               new_pt = new Point(actual_mouse_pt.x+i, actual_mouse_pt.y+j);
+               world.setBackground(new_pt, alternate_background);
+               WorldEntity[][] occupancy_grid = world.getOccupancy();
+               WorldEntity test_entity = world.getCell(occupancy_grid, new_pt);
+               if (test_entity instanceof Miner)
+               {
+                  MachoMan new_Macho = new MachoMan(MACHO_MAN_NAME, new_pt, MACHO_MAN_RATE,
+                          MACHO_MAN_ANIMATE, Chicken.class, macho_imgs);
+                  world.addEntity(new_Macho);
+                  new_Macho.scheduleAnimation(world);
+                  new_Macho.scheduleAction(world, new_Macho, new_Macho.createAction(world, imageStore), next_time);
+                  Point chicken_pt = new Point(new_pt.x-1, new_pt.y+5);
+                  List<PImage> chicken_imgs = imageStore.get("chicken");
+                  Chicken chicken_1 = new Chicken("Little", chicken_pt, 420, 100, chicken_imgs);
+                  world.addEntity(chicken_1);
+                  chicken_1.scheduleAnimation(world);
+                  chicken_1.scheduleAction(world, chicken_1, chicken_1.createAction(world, imageStore), next_time);
 
-            //LinkedList<Node> openSet_list = openSet.getItems();
-            LinkedList<Node> selected_path = mobile_entity.getTotalPath();
-                  /*for (Node node : openSet_list)
-                  {
-                     image(openSet_image, node.getPosition().y*32, node.getPosition().x*32);
-                  */
-            for (Node path_node : selected_path)
-            {
-               image(path_image, (path_node.getPosition().x * 32)+4, (path_node.getPosition().y * 32)+4);
+               }
             }
          }
+*/
       }
    }
 
@@ -138,6 +148,12 @@ public class Main extends PApplet
          }
          view.updateView(dx, dy);
       }
+   }
+
+   private static Background createAlternateBackground(ImageStore imageStore)
+   {
+      List<PImage> alternateImgs = imageStore.get(ALTERNATE_IMAGE_NAME);
+      return new Background(ALTERNATE_IMAGE_NAME, alternateImgs);
    }
 
    private static Background createDefaultBackground(ImageStore imageStore)

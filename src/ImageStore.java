@@ -14,6 +14,8 @@ public final class ImageStore
 
    private Map<String, List<PImage>> images;
    private List<PImage> defaultImages;
+   public static List<PImage> chicken_imgs;
+   public static List<PImage> macho_imgs;
 
    public ImageStore(PImage defaultImage)
    {
@@ -45,18 +47,30 @@ public final class ImageStore
       {
          String key = attrs[0];
          PImage img = sketch.loadImage(attrs[1]);
+         /*
+         if (key.equals("macho"))
+         {
+            macho_imgs.add(img);
+         }
+         if (key.equals("chicken"))
+         {
+            macho_imgs.add(img);
+         }
+         */
          if (img != null && img.width != -1)
          {
+
             List<PImage> imgs = getImages(images, key);
             imgs.add(img);
 
-            if (attrs.length >= KEYED_IMAGE_MIN)
-            {
+            if (attrs.length >= KEYED_IMAGE_MIN) {
                int r = Integer.parseInt(attrs[2]);
                int g = Integer.parseInt(attrs[3]);
                int b = Integer.parseInt(attrs[4]);
                setAlpha(img, sketch.color(r, g, b), 0);
             }
+
+
          }
       }
    }

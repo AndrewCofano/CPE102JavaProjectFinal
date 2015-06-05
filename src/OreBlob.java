@@ -5,10 +5,12 @@ public class OreBlob
    extends MobileAnimatedActor
 {
    private static final int QUAKE_ANIMATION_RATE = 100;
+
    public OreBlob(String name, Point position, int rate, int animation_rate,
       List<PImage> imgs)
    {
       super(name, position, rate, animation_rate, imgs);
+
    }
 
    protected boolean canPassThrough(WorldModel world, Point pt)

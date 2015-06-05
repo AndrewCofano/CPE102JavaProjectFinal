@@ -18,6 +18,11 @@ public abstract class AnimatedActor
       return this.animation_rate;
    }
 
+   public void setAnimation_rate(int new_rate)
+   {
+      this.animation_rate = new_rate;
+   }
+
    public void schedule(WorldModel world, long time, ImageStore imageStore)
    {
       super.schedule(world, time, imageStore);

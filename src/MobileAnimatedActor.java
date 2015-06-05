@@ -13,6 +13,11 @@ public abstract class MobileAnimatedActor
    public ArrayList<Node> closedSet;
    public OrderedList<Node> openSet;
    public LinkedList<Node> total_path;
+   public boolean isCharizard;
+
+   public static final Random chicken_rand = new Random();
+   public static final int CHICKEN_MAX_POSITION = 4;
+   public static final int CHICKEN_MIN_POSITION = 1;
 
    public MobileAnimatedActor(String name, Point position, int rate,
                               int animation_rate, List<PImage> imgs) {
@@ -48,6 +53,60 @@ public abstract class MobileAnimatedActor
          }
       }
       */
+      if (this instanceof Chicken)
+      {
+         int randint = chicken_rand.nextInt(4);
+         Point next_position;
+         Chicken chick = (Chicken)this;
+         if (randint == 0)
+         {
+            next_position = new Point(chick.getPosition().x-1, chick.getPosition().y);
+            if ((chick.valid_NextPosition(world, next_position)))
+            {
+               return next_position;
+            }
+            else
+            {
+               return chick.getPosition();
+            }
+         }
+         if (randint == 1)
+         {
+            next_position = new Point(chick.getPosition().x, chick.getPosition().y-1);
+            if ((chick.valid_NextPosition(world, next_position)))
+            {
+               return next_position;
+            }
+            else
+            {
+               return chick.getPosition();
+            }
+         }
+         if (randint == 2)
+         {
+            next_position = new Point(chick.getPosition().x+1, chick.getPosition().y);
+            if (chick.valid_NextPosition(world, next_position))
+            {
+               return next_position;
+            }
+            else
+            {
+               return chick.getPosition();
+            }
+         }
+         if (randint == 3)
+         {
+            next_position = new Point(chick.getPosition().x, chick.getPosition().y+1);
+            if (chick.valid_NextPosition(world, next_position))
+            {
+               return next_position;
+            }
+            else
+            {
+               return chick.getPosition();
+            }
+         }
+      }
       Node current = new Node(this.getPosition());
       Node destination = new Node(dest_pt);
       LinkedList<Node> path = A_Star(world, current, destination);
@@ -79,6 +138,8 @@ public abstract class MobileAnimatedActor
       return distance;
    }
 
+
+
    public boolean valid_neighbor(WorldModel world, Node neighbor) {
       Point pt = neighbor.getPosition();
       if (!world.withinBounds(pt)) {
@@ -87,10 +148,11 @@ public abstract class MobileAnimatedActor
       WorldObject class_check = WorldModel.getCell(world.getOccupancy(), pt);
       if (this.isMiner()) {
          if (!(class_check instanceof Miner || class_check instanceof Obstacle ||
-                 class_check instanceof OreBlob || class_check instanceof Vein)) {
+                 class_check instanceof OreBlob || class_check instanceof Vein ||
+                 class_check instanceof MachoMan || class_check instanceof Chicken)) {
             return true;
          }
-         if (!(class_check instanceof Blacksmith)) {
+         else if (!(class_check instanceof Blacksmith)) {
             return false;
          } else {
             return false;
@@ -104,9 +166,7 @@ public abstract class MobileAnimatedActor
             return false;
          }
       }
-
-
-         /*
+      /*
       }
       {
          return true;

@@ -45,6 +45,10 @@ public abstract class Actor
       super.remove(world);
    }
 
+   public void setRate(int new_rate){
+      this.rate = new_rate;
+   }
+
    protected static void scheduleAction(WorldModel world, Actor entity,
       Action action, long time)
    {

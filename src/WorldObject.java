@@ -49,4 +49,9 @@ public class WorldObject
    {
       return imgs;
    }
+
+   protected void setImages(List<PImage> new_imgs)
+   {
+      this.imgs = new_imgs;
+   }
 }
