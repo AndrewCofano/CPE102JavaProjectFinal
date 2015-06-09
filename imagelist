@@ -28,3 +28,40 @@ quake images/quake6.bmp 255 255 255 0
 rocks images/rock.bmp
 vein images/vein.bmp
 background_default images/none.bmp
+background_alternate images/weight_background.png
+macho images/macho_man_1.bmp 255 255 255 0
+macho images/macho_man_2.bmp 255 255 255 0
+chicken images/chicken_1.bmp 100 100 150 0
+chicken images/chicken_2.bmp 100 100 150 0
+chicken images/chicken_3.bmp 100 100 150 0
+chicken images/chicken_4.bmp 100 100 150 0
+chicken images/chicken_5.bmp 100 100 150 0
+chicken images/chicken_6.bmp 100 100 150 0
+char images/char_0000_Layer12.bmp 100 100 150
+char images/char_0001_Layer11.bmp 100 100 150
+char images/char_0002_Layer10.bmp 100 100 150
+char images/char_0003_Layer9.bmp 100 100 150
+char images/char_0004_Layer8.bmp 100 100 150
+char images/char_0005_Layer7.bmp 100 100 150
+char images/char_0006_Layer6.bmp 100 100 150
+char images/char_0007_Layer5.bmp 100 100 150
+char images/char_0008_Layer4.bmp 100 100 150
+char images/char_0009_Layer3.bmp 100 100 150
+char images/char_0010_Layer2.bmp 100 100 150
+char images/char_0011_Layer1.bmp 100 100 150
+char2 images/char2_0000_Layer14.bmp 100 100 150
+char2 images/char2_0001_Layer15.bmp 100 100 150
+char2 images/char2_0002_Layer16.bmp 100 100 150
+char2 images/char2_0003_Layer17.bmp 100 100 150
+char2 images/char2_0004_Layer18.bmp 100 100 150
+char2 images/char2_0005_Layer19.bmp 100 100 150
+char2 images/char2_0006_Layer20.bmp 100 100 150
+char2 images/char2_0007_Layer21.bmp 100 100 150
+char2 images/char2_0008_Layer22.bmp 100 100 150
+char2 images/char2_0009_Layer23.bmp 100 100 150
+char2 images/char2_0010_Layer24.bmp 100 100 150
+char2 images/char2_0011_Layer25.bmp 100 100 150
+char3 images/char3_0000_Layer9.bmp 100 100 150
+char3 images/char3_0001_Layer8.bmp 100 100 150
+char3 images/char3_0002_Layer7.bmp 100 100 150
+char3 images/char3_0003_Layer6.bmp 100 100 150
